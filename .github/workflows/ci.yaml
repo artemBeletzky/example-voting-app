@@ -19,6 +19,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Build with Docker Compose
         run: docker compose -f docker-compose.yml build
 
