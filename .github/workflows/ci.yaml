@@ -20,8 +20,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Docker build
-        uses: docker/build-push-action@v6
-        with:
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: wetcoffeeBean/docker-ci-automation:latest, wetcoffeeBean/docker-ci-automation:01
+      - name: Build with Docker Compose
+        run: docker compose build
+
+      - name: Push images
+        if: github.event_name != 'pull_request'
+        run:
+          docker tag voting_app:latest wetcoffeeBean/votingApp:1
+          docker push wetcoffeeBean/votingApp:1
