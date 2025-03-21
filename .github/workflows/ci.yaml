@@ -23,10 +23,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build with Docker Compose
-        run: docker compose -f docker-compose.yml build
+        run: export COMPOSE_PROJECT_NAME=voting-app
+             docker compose -f docker-compose.yml build
 
       - name: Push images
         if: github.event_name != 'pull_request'
         run:
-          docker tag voting_app:latest wetcoffeeBean/votingApp:1
-          docker push wetcoffeeBean/votingApp:1
+          docker tag ${COMPOSE_PROJECT_NAME}_vote:latest wetcoffeeBean/voting-app-vote:1
+          docker tag ${COMPOSE_PROJECT_NAME}_result:latest wetcoffeeBean/voting-app-result:1
+          docker tag ${COMPOSE_PROJECT_NAME}_worker:latest wetcoffeeBean/voting-app-worker:1
+          
+          docker push wetcoffeeBean/voting-app-vote:1
+          docker push wetcoffeeBean/voting-app-result:1
+          docker push v/voting-app-worker:1
