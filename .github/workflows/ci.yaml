@@ -21,7 +21,9 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v4
-#        sdds
+
+      - name: Create .env file
+        run: echo "COMPOSE_PROJECT_NAME=example" > .env
 
       - name: Build with Docker Compose
         run: export COMPOSE_PROJECT_NAME=voting-app && docker compose -f docker-compose.yml build
