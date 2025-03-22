@@ -25,16 +25,13 @@ jobs:
       - name: Build with Docker Compose
         run: docker compose -f docker-compose.yml build
 
-      - name: debug
-        run: docker images
+      - name: Tag and Push Images
+        run: |
+          docker tag wetcoffeeBean/voting-app-vote:latest wetcoffeeBean/voting-app-vote:1
+          docker tag wetcoffeeBean/voting-app-result:latest wetcoffeeBean/voting-app-result:1
+          docker tag wetcoffeeBean/voting-app-worker:latest wetcoffeeBean/voting-app-worker:1
+      
+          docker push wetcoffeeBean/voting-app-vote:1
+          docker push wetcoffeeBean/voting-app-result:1
+          docker push wetcoffeeBean/voting-app-worker:1
 
-#      - name: Push images
-#        if: github.event_name != 'pull_request'
-#        run: |
-#          docker tag voting-app-vote:latest wetcoffeeBean/voting-app-vote:1
-#          docker tag voting-app-result:latest wetcoffeeBean/voting-app-result:1
-#          docker tag voting-app-worker:latest wetcoffeeBean/voting-app-worker:1
-#
-#          docker push wetcoffeeBean/voting-app-vote:1
-#          docker push wetcoffeeBean/voting-app-result:1
-#          docker push wetcoffeeBean/voting-app-worker:1
