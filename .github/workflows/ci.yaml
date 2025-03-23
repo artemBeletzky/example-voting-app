@@ -54,6 +54,9 @@ jobs:
       - name: Build with Docker Compose
         run: docker compose -f docker-compose.yml build
 
+      - name: List Docker Images
+        run: docker images
+
       - name: Tag and Push Images
         run: |
           docker push docker.io/wetcoffeeBean/voting-app-vote:1
