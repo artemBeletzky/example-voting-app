@@ -56,9 +56,4 @@ jobs:
 
       - name: Tag and Push Images
         run: |
-          docker tag wetcoffeeBean/voting-app-vote:latest docker.io/wetcoffeeBean/voting-app-vote:1
-          docker tag wetcoffeeBean/voting-app-result:latest docker.io/wetcoffeeBean/voting-app-result:1
-          docker tag wetcoffeeBean/voting-app-worker:latest docker.io/wetcoffeeBean/voting-app-worker:1
           docker push docker.io/wetcoffeeBean/voting-app-vote:1
-          docker push docker.io/wetcoffeeBean/voting-app-result:1
-          docker push docker.io/wetcoffeeBean/voting-app-worker:1
